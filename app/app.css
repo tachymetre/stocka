@@ -1,4 +1,12 @@
-#content {
-  position: relative;
-  margin-top: 20vh; 
+.row:first-child {
+    background: #56445D;
+}
+
+#stocka-header h3 {
+    color: white;
+}
+
+#stocka-content {
+    position: relative;
+    margin-top: 20vh;
 }

@@ -1,10 +1,19 @@
-<div id="content" class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-push-4">
-    <h1>Stock Information Lookup</h1>
-    <form>
-        <div class="form-group">
-            <label for="stockInput">Stock Symbol:</label>
-            <input ng-model="stockSymbol" ng-change="updateSymbol(stockSymbol)" id="stockInput" type="text" class="form-control" placeholder="ex: AAPL, GOOG, etc"></input>
+<div class="container-fluid">
+    <div class="row">
+        <div id="stocka-header" class="header clearfix col-xs-12 col-sm-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+            <h3 class="text-muted">Stocka</h3>
         </div>
-        <button class="btn btn-success" type="submit" ng-click="getStockData(stockSymbol)">Get Details</button>
-    </form>
+    </div>
+    <div class="row">
+        <div id="stocka-content" class="col-xs-12 col-sm-12 col-md-4 col-md-push-4 col-lg-4 col-lg-push-4">
+            <h1>Stock Information Lookup</h1>
+            <form>
+                <div class="form-group">
+                    <label for="stockInput">Stock Symbol:</label>
+                    <input ng-model="stockSymbol" ng-change="updateSymbol(stockSymbol)" id="stockInput" type="text" class="form-control" placeholder="ex: AAPL, GOOG, etc"></input>
+                </div>
+                <button class="btn btn-success" type="submit" ng-click="getStockData(stockSymbol)">Get Details</button>
+            </form>
+        </div>
+    </div>
 </div>
