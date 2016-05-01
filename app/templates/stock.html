@@ -10,9 +10,10 @@
             <form>
                 <div class="form-group">
                     <label for="stockInput">Stock Symbol:</label>
-                    <input ng-model="stockSymbol" ng-change="updateSymbol(stockSymbol)" id="stockInput" type="text" class="form-control" placeholder="ex: AAPL, GOOG, etc"></input>
+                    <input ng-model="stock.stockSymbol" ng-change="stock.updateSymbol(stock.stockSymbol)" id="stockInput" type="text" class="form-control" placeholder="ex: AAPL, GOOG, etc"></input>
                 </div>
-                <button class="btn btn-success" type="submit" ng-click="getStockData(stockSymbol)">Get Details</button>
+                <button class="btn btn-success" type="submit" ng-click="stock.visualizeStockData()" title="Show a graph of request symbol">Visualize Data</button>
+                <button class="btn btn-default" type="submit" ng-click="stock.getStockData(stock.stockSymbol)" title="Download details into CSV">Get Details</button>
             </form>
         </div>
     </div>

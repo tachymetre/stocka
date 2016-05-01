@@ -8,7 +8,7 @@ angular.module('stockApp', [
 config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/stock', {
         templateUrl: 'templates/stock.html',
-        controller: 'stockController'
+        controller: 'stockController as stock'
     });
     $routeProvider.otherwise({ redirectTo: '/stock' });
 }]);

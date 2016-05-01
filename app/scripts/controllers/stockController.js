@@ -1,33 +1,39 @@
 'use strict';
 var app = angular.module("stockApp.stock", []);
 
-app.controller("stockController", function($scope, getStockInfo) {
+app.controller("stockController", function(getStockInfo) {
+    var vm = this;
     var stockDataArray = [];
     var neededData;
 
     // When user changes the inputs, update accordingly
-    $scope.updateSymbol = function(symbol) {
-        $scope.requestSymbol = symbol;
+    vm.updateSymbol = function(symbol) {
+        vm.requestSymbol = symbol;
     };
 
+    // Visualize the stock data into D3 graphs
+    vm.visualizeStockData = function() {
+        console.log("Hello");
+    }
+
     // Get the summary data for a particle stock
-    $scope.getStockData = function() {
-        getStockInfo.getSummary($scope.requestSymbol).then(function(response) {
-            $scope.stockData = response.data;
-            neededData = $scope.stockData.query.results.quote;
+    vm.getStockData = function() {
+        getStockInfo.getSummary(vm.requestSymbol).then(function(response) {
+            vm.stockData = response.data;
+            neededData = vm.stockData.query.results.quote;
             if (Array.isArray(neededData)) {
                 neededData.forEach(function(value, index) {
-                    $scope.saveStockData(value);
+                    vm.saveStockData(value);
                 });
                 neededData.length = 0;
             } else {
-            	$scope.saveStockData(neededData);
+            	vm.saveStockData(neededData);
             }
         });
     }
 
     // Download data into CSV depends on the singularity
-    $scope.saveStockData = function(data) {
+    vm.saveStockData = function(data) {
         for (var prop in data) {
             stockDataArray.push([prop, data[prop]]);
         }
