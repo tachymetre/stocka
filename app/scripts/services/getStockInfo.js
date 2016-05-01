@@ -30,12 +30,6 @@ app.factory("getStockInfo", function($http) {
                 url: baseStockUrl + prependQueryStockUrl + paramQuery + appendQueryStockUrl
             });
             return promise;
-        },
-        getCalls: function() {
-            // Do the same with getSummary, with updated API
-        },
-        getPuts: function() {
-            // Do the same with getSummary, with updated API
         }
     };
 });
