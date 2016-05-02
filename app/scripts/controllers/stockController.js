@@ -51,7 +51,7 @@ app.controller("stockController", function(getStockInfo) {
         var link = document.createElement("a");
         stockDataArray = [];
         link.setAttribute("href", encodedURI);
-        link.setAttribute("download", "stock_summary.csv");
+        link.setAttribute("download", "stock_summary_" + vm.requestSymbol + ".csv");
         link.click();
     }
 });

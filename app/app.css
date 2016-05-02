@@ -1,21 +1,28 @@
 .row:first-child {
-    background: #56445D;
+    background: #4F86C6;
 }
 
-#stocka-header h1 {
+#stocka-header h2 {
     color: white;
+    margin: 10px 0;
 }
 
 #stocka-content {
     position: relative;
-    margin-top: 20vh;
+    margin-top: 10vh;
 }
 
-// FOR STOCK CHART
-.chart {
+
+/*======================================
+=            CHART STYLINGS            =
+======================================*/
+
+.chart__wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
     text-align: center;
-    margin: 0 auto;
-    margin-top: 8vh;
+    margin: 5vh 0;
 }
 
 .chart__grid {

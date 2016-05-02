@@ -1,13 +1,13 @@
 'use strict';
 
 app.factory("getStockInfo", function($http) {
-    var baseStockUrl = 'http://query.yahooapis.com/v1/public/yql',
-        prependQueryStockUrl = '?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20IN%20(',
-        appendQueryStockUrl = ')&format=json&env=http://datatables.org/alltables.env',
-        rawParams,
+    var rawParams,
+        paramQuery,
         transformParams,
         transformArray = [],
-        paramQuery;
+        baseStockUrl = 'http://query.yahooapis.com/v1/public/yql',
+        appendQueryStockUrl = ')&format=json&env=http://datatables.org/alltables.env',
+        prependQueryStockUrl = '?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20IN%20(';
 
     return {
         getSummary: function(requestParams) {

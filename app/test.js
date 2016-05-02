@@ -1,15 +1,24 @@
-/* global d3, _ */
-
 (function() {
-    var margin = { top: 30, right: 20, bottom: 100, left: 50 },
-        margin2 = { top: 210, right: 20, bottom: 20, left: 50 },
+    var margin = {
+            top: 30,
+            right: 20,
+            bottom: 100,
+            left: 50
+        },
+        margin2 = {
+            top: 210,
+            right: 20,
+            bottom: 20,
+            left: 50
+        },
         width = 764 - margin.left - margin.right,
         height = 283 - margin.top - margin.bottom,
         height2 = 283 - margin2.top - margin2.bottom;
 
     var parseDate = d3.time.format('%d/%m/%Y').parse,
         bisectDate = d3.bisector(function(d) {
-            return d.date; }).left,
+            return d.date;
+        }).left,
         legendFormat = d3.time.format('%b %d, %Y');
 
     var x = d3.time.scale().range([0, width]),
@@ -26,27 +35,33 @@
     var priceLine = d3.svg.line()
         .interpolate('monotone')
         .x(function(d) {
-            return x(d.date); })
+            return x(d.date);
+        })
         .y(function(d) {
-            return y(d.price); });
+            return y(d.price);
+        });
 
     var avgLine = d3.svg.line()
         .interpolate('monotone')
         .x(function(d) {
-            return x(d.date); })
+            return x(d.date);
+        })
         .y(function(d) {
-            return y(d.average); });
+            return y(d.average);
+        });
 
     var area2 = d3.svg.area()
         .interpolate('monotone')
         .x(function(d) {
-            return x2(d.date); })
+            return x2(d.date);
+        })
         .y0(height2)
         .y1(function(d) {
-            return y2(d.price); });
+            return y2(d.price);
+        });
 
     var stockGraph = d3.select("body").append('div')
-        .attr('class', 'col-xs-12 col-sm-12 col-md-4 col-md-push-4 col-lg-5 col-lg-push-4')
+        .attr('class', 'chart__wrapper')
         .attr('id', 'stocka-graph');
 
     var svg = stockGraph.append('svg')
@@ -101,20 +116,25 @@
                 .on('brush', brushed);
 
             var xRange = d3.extent(data.map(function(d) {
-                return d.date; }));
+                return d.date;
+            }));
 
             x.domain(xRange);
             y.domain(d3.extent(data.map(function(d) {
-                return d.price; })));
+                return d.price;
+            })));
             y3.domain(d3.extent(data.map(function(d) {
-                return d.price; })));
+                return d.price;
+            })));
             x2.domain(x.domain());
             y2.domain(y.domain());
 
             var min = d3.min(data.map(function(d) {
-                return d.price; }));
+                return d.price;
+            }));
             var max = d3.max(data.map(function(d) {
-                return d.price; }));
+                return d.price;
+            }));
 
             var range = legend.append('text')
                 .text(legendFormat(new Date(xRange[0])) + ' - ' + legendFormat(new Date(xRange[1])))
@@ -152,12 +172,15 @@
                 .enter().append('rect')
                 .attr('class', 'chart__bars')
                 .attr('x', function(d, i) {
-                    return x(d.date); })
+                    return x(d.date);
+                })
                 .attr('y', function(d) {
-                    return 155 - y3(d.price); })
+                    return 155 - y3(d.price);
+                })
                 .attr('width', 1)
                 .attr('height', function(d) {
-                    return y3(d.price); });
+                    return y3(d.price);
+                });
 
             var helper = focus.append('g')
                 .attr('class', 'chart__helper')
@@ -232,13 +255,16 @@
                     x.domain(brush.empty() ? x2.domain() : brush.extent());
                     y.domain([
                         d3.min(data.map(function(d) {
-                            return (d.date >= ext[0] && d.date <= ext[1]) ? d.price : max; })),
+                            return (d.date >= ext[0] && d.date <= ext[1]) ? d.price : max;
+                        })),
                         d3.max(data.map(function(d) {
-                            return (d.date >= ext[0] && d.date <= ext[1]) ? d.price : min; }))
+                            return (d.date >= ext[0] && d.date <= ext[1]) ? d.price : min;
+                        }))
                     ]);
                     range.text(legendFormat(new Date(ext[0])) + ' - ' + legendFormat(new Date(ext[1])))
                     focusGraph.attr('x', function(d, i) {
-                        return x(d.date); });
+                        return x(d.date);
+                    });
 
                     var days = Math.ceil((ext[1] - ext[0]) / (24 * 3600 * 1000))
                     focusGraph.attr('width', (40 > days) ? (40 - days) * 5 / 6 : 5)
