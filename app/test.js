@@ -15,12 +15,14 @@
         height = 283 - margin.top - margin.bottom,
         height2 = 283 - margin2.top - margin2.bottom;
 
+    // Date format config 
     var parseDate = d3.time.format('%d/%m/%Y').parse,
+        legendFormat = d3.time.format('%b %d, %Y'),
         bisectDate = d3.bisector(function(d) {
             return d.date;
-        }).left,
-        legendFormat = d3.time.format('%b %d, %Y');
+        }).left;
 
+    // Scaling format config
     var x = d3.time.scale().range([0, width]),
         x2 = d3.time.scale().range([0, width]),
         y = d3.scale.linear().range([height, 0]),
@@ -28,10 +30,12 @@
         y2 = d3.scale.linear().range([height2, 0]),
         y3 = d3.scale.linear().range([60, 0]);
 
+    // Axis component config
     var xAxis = d3.svg.axis().scale(x).orient('bottom'),
         xAxis2 = d3.svg.axis().scale(x2).orient('bottom'),
         yAxis = d3.svg.axis().scale(y).orient('left');
 
+    // Priceline format config
     var priceLine = d3.svg.line()
         .interpolate('monotone')
         .x(function(d) {
@@ -41,6 +45,7 @@
             return y(d.price);
         });
 
+    // Averageline format config
     var avgLine = d3.svg.line()
         .interpolate('monotone')
         .x(function(d) {
@@ -50,6 +55,7 @@
             return y(d.average);
         });
 
+    // Chart area config
     var area2 = d3.svg.area()
         .interpolate('monotone')
         .x(function(d) {
@@ -60,6 +66,7 @@
             return y2(d.price);
         });
 
+    // Create chart's element
     var stockGraph = d3.select("body").append('div')
         .attr('class', 'chart__wrapper')
         .attr('id', 'stocka-graph');
@@ -75,31 +82,24 @@
         .attr('width', width)
         .attr('height', height);
 
-    var make_y_axis = function() {
-        return d3.svg.axis()
-            .scale(y)
-            .orient('left')
-            .ticks(3);
-    };
-
     var focus = svg.append('g')
         .attr('class', 'focus')
-        .attr('transform', 'translate(' + 0 + ',' + margin.top + ')');
+        .attr('transform', 'translate(0,' + margin.top + ')');
 
     var barsGroup = svg.append('g')
         .attr('class', 'volume')
         .attr('clip-path', 'url(#clip)')
-        .attr('transform', 'translate(' + 0 + ',' + (margin.top + 60 + 20) + ')');
+        .attr('transform', 'translate(0,' + (margin.top + 80) + ')');
 
     var context = svg.append('g')
         .attr('class', 'context')
-        .attr('transform', 'translate(' + 0 + ',' + (margin2.top + 60) + ')');
+        .attr('transform', 'translate(0,' + (margin2.top + 60) + ')');
 
     var legend = svg.append('g')
         .attr('class', 'chart__legend')
         .attr('width', width)
-        .attr('height', 30)
-        .attr('transform', 'translate(' + 0 + ', 10)');
+        .attr('height', 50)
+        .attr('transform', 'translate(0, 10)');
 
     legend.append('text')
         .attr('class', 'chart__symbol')
@@ -108,7 +108,15 @@
     var rangeSelection = legend
         .append('g')
         .attr('class', 'chart__range-selection')
-        .attr('transform', 'translate(110, 0)');
+        .attr('transform', 'translate(120, 0)');
+
+    // Helper function to coordinate y-axis
+    var make_y_axis = function() {
+        return d3.svg.axis()
+            .scale(y)
+            .orient('left')
+            .ticks(3);
+    };
 
     d3.csv('./data/aapl.csv', type, function(err, data) {
             var brush = d3.svg.brush()
@@ -244,7 +252,7 @@
                 var d0 = data[i - 1];
                 var d1 = data[i];
                 var d = x0 - d0.date > d1.date - x0 ? d1 : d0;
-                helperText.text(legendFormat(new Date(d.date)) + ' - Price: ' + d.price + ' Avg: ' + d.average);
+                helperText.text(legendFormat(new Date(d.date)) + ' - Price: ' + d.price + ', Avg: ' + d.average);
                 priceTooltip.attr('transform', 'translate(' + x(d.date) + ',' + y(d.price) + ')');
                 averageTooltip.attr('transform', 'translate(' + x(d.date) + ',' + y(d.average) + ')');
             }
