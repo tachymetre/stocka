@@ -1,6 +1,6 @@
 # Stocka — Stock symbol lookup
 
-**Stocka** is a web application built on [AngularJS](https://angularjs.org/) technology that  provides a way to lookup and download stock information into CSV files automatically . You can use it to quickly find out the summary, calls, or puts of a single stock or multiple of them. The app focuses on stock options such as: Previous Close, Open, Bid, Ask, 1-year Target Estimate, Beta Constant, Earnings Date, Day’s Range, 52-week Range, Volume, Average Volume (3 months), Market Cap, P/E, EPS, Dividend & Yield, etc.
+**Stocka** is a web application built on [AngularJS](https://angularjs.org/) and [D3](https://d3js.org/) technology that  provides a way to lookup and download stock information into CSV files automatically . You can use it to quickly find out the summary, calls, or puts of a single stock or multiple of them. The app focuses on stock options such as: Previous Close, Open, Bid, Ask, 1-year Target Estimate, Beta Constant, Earnings Date, Day’s Range, 52-week Range, Volume, Average Volume (3 months), Market Cap, P/E, EPS, Dividend & Yield, etc.
 
 The application contains all needed dependencies and is preconfigured to install the [Angular](https://angularjs.org/), [Bootstrap](http://getbootstrap.com/) frameworks and a bunch of development as well as testing tools for instant web development gratification.
 
@@ -55,11 +55,7 @@ Behind the scenes this will also call `bower install`.  You should find that you
 folders in your project.
 
 * `node_modules` - contains the npm packages for the tools we need
-* `app/bower_components` - contains the angular framework files
-
-*Note that the `bower_components` folder would normally be installed in the root folder but
-stocka changes this location through the `.bowerrc` file.  Putting it in the app folder makes
-it easier to serve the files by a webserver.*
+* `bower_components` - contains the angular framework files
 
 ### Run the Application
 
@@ -124,11 +120,13 @@ stocka/
   |  |   scripts/
   |  |   |   controllers/
   |  |   |   |   stockController.js
+  |  |   |   directives/
+  |  |   |   |   visualizeStockData.js
   |  |   |   services/
+  |  |   |   |   d3.js                
   |  |   |   |   getStockInfo.js
   |  |   templates/
   |  |   |   stock.html
-  |  |   |   stock_test.js
   |  |   app.css                                --> default stylesheet
   |  |   app.js                                 --> main application module
   |  |   index.html                             --> app layout file (the main html template file of the app)
