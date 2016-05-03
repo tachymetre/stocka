@@ -50,7 +50,7 @@
             var link = document.createElement("a");
             stockDataArray = [];
             link.setAttribute("href", encodedURI);
-            link.setAttribute("download", "stock_summary_" + vm.requestSymbol + ".csv");
+            link.setAttribute("download", "stock_summary_" + data.symbol + ".csv");
             link.click();
         }
     });
