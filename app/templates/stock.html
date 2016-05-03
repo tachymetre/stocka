@@ -10,12 +10,11 @@
             <form>
                 <div class="form-group">
                     <label for="stockInput">Stock Symbol:</label>
-                    <input ng-model="stock.stockSymbol" ng-change="stock.updateSymbol(stock.stockSymbol)" id="stockInput" type="text" class="form-control" placeholder="ex: AAPL, GOOG, etc"></input>
+                    <input ng-model="stock.stockSymbol" ng-change="stock.updateSymbol(stock.stockSymbol)" id="stockInput" type="text" class="form-control" placeholder="ex: AAPL, GOOG, etc" required=""></input>
                 </div>
-                <button class="btn btn-success" type="submit" title="Show a graph of request symbol">Visualize Data</button>
-                <button class="btn btn-default" type="submit" ng-click="stock.getStockData()" title="Download details into CSV">Get Details</button>
+                <button class="btn btn-success" type="submit" title="Show a graph of request symbol" visualize-stock-data request-symbol="{{stock.stockSymbol}}" required>Visualize Data</button>
+                <button class="btn btn-default" type="submit" ng-click="stock.getStockData()" title="Download details into CSV" required>Get Details</button>
             </form>
-            <div visualize-stock-data></div>
         </div>
     </div>
 </div>
