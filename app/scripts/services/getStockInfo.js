@@ -44,7 +44,7 @@
                     appendQueryStockUrl = '&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
 
                 // Check if param(s) is singular or not
-                paramQuery = requestParams;
+                paramQuery = "'" + requestParams + "'";
 
                 // Return promise object for async operation in the controller
                 var promise = $http({
