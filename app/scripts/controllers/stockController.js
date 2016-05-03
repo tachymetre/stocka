@@ -33,7 +33,7 @@
             });
         }
 
-        // Download data into CSV depends on the singularity
+        // Download data into CSV files depends on the singularity
         vm.saveStockData = function(data) {
             for (var prop in data) {
                 stockDataArray.push([prop, data[prop]]);
