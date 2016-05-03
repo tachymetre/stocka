@@ -38,6 +38,11 @@
                     if (!scope.requestSymbol) {
                         return;
                     }
+                    // Check if the stock chart has already rendered or not
+                    var element = document.getElementById('stocka-graph-' + scope.requestSymbol);
+                    if (typeof(element) != 'undefined' && element != null) {
+                        element.style.display = 'none';
+                    }
                     // Dimensions and margins format config
                     var margin = {
                             top: 30,
@@ -102,7 +107,7 @@
                     // Create chart's element
                     var stockGraph = d3.select("body").append('div')
                         .attr('class', 'chart__wrapper')
-                        .attr('id', 'stocka-graph');
+                        .attr('id', 'stocka-graph-' + scope.requestSymbol);
 
                     var svg = stockGraph.append('svg')
                         .attr('class', 'chart')
