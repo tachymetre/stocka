@@ -36,8 +36,8 @@
                 return promise;
             },
             getVisualizedData: function(requestParams) {
-                var startDateStock = '"2015-05-01"',
-                    endDateStock = '"2016-04-29"',
+                var startDateStock = "'" + new Date(new Date().setMonth(new Date().getMonth() - 12)).toJSON().slice(0, 10) + "'",
+                    endDateStock = "'" + new Date().toJSON().slice(0, 10) + "'",
                     prependQueryStartDate = ' and startDate %3D ',
                     prependQueryEndDate = ' and endDate %3D ',
                     baseStockUrl = 'https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol %3D ',
