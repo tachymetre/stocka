@@ -12,13 +12,11 @@
             vm.requestSymbol = symbol;
         };
 
-        // Visualize the stock data into D3 graphs
-        vm.visualizeStockData = function() {
-            console.log("Hello");
-        }
-
         // Get the summary data for a particle stock
         vm.getStockData = function() {
+            if (!vm.requestSymbol) {
+                return;
+            }
             getStockInfo.getSummary(vm.requestSymbol).then(function(response) {
                 vm.stockData = response.data;
                 neededData = vm.stockData.query.results.quote;
