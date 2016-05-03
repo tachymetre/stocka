@@ -7,7 +7,7 @@ The application contains all needed dependencies and is preconfigured to install
 References of stock options can be found from the following destinations: [Yahoo Finance](http://finance.yahoo.com/), [Google Finance](https://www.google.com/finance)
 
 ### Screenshots
-![stocka-1](http://i1175.photobucket.com/albums/r629/bminhz/Screen%20Shot%202016-05-01%20at%2012.49.43%20PM_zpsdhf7dfd4.png)
+![stocka-1](http://i1175.photobucket.com/albums/r629/bminhz/Screen%20Shot%202016-05-03%20at%2011.51.44%20AM_zpsjasgsvga.png)
 
 ## Getting Started
 
