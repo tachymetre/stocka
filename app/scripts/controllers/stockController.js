@@ -6,7 +6,7 @@
         var vm = this;
         var stockDataArray = [];
         var neededData;
-
+        
         // When user changes the inputs, update accordingly
         vm.updateSymbol = function(symbol) {
             vm.requestSymbol = symbol;

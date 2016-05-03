@@ -5,8 +5,16 @@
     app.directive('visualizeStockData', function(d3, getStockInfo) {
         return {
             restrict: 'EA',
-            scope: true,
-            link: function(scope, elem, attrs) {
+            scope: {},
+            controller: 'stockController',
+            controllerAs: 'vm',
+            bindToController: {
+                requestSymbol: '='
+            },
+            link: function(scope, elem, attrs, ctrl) {
+
+                var buttons = angular.element('button');
+                console.log(buttons);
                 // Dimensions and margins format config
                 var margin = {
                         top: 30,
@@ -29,7 +37,7 @@
                     legendFormat = d3.time.format('%b %d, %Y'),
                     bisectDate = d3.bisector(function(d) {
                         return d.date;
-                    }).left;
+                    }).right;
 
                 // Scaling format config
                 var x = d3.time.scale().range([0, width]),
@@ -112,7 +120,7 @@
 
                 legend.append('text')
                     .attr('class', 'chart__symbol')
-                    .text('NASDAQ: AAPL')
+                    .text('NASDAQ: ' + ctrl.requestSymbol);
 
                 var rangeSelection = legend
                     .append('g')
@@ -127,22 +135,14 @@
                         .ticks(3);
                 };
 
-                // function type(d) {
-                //     return {
-                //         date: parseDate(d.Date),
-                //         price: +d.Close,
-                //         average: +d.Average,
-                //         volume: +d.Volume,
-                //     }
-                // }
-
+                // Transform data from API to the correct format for D3 usage
                 function transformData(d) {
                     var average;
                     var stockDate;
                     var data;
                     var dataArray = [];
                     d.forEach(function(v, i) {
-                        average = (parseFloat(v.High) + parseFloat(v.Low))/2;
+                        average = (parseFloat(v.High) + parseFloat(v.Low)) / 2;
                         data = {
                             average: average,
                             date: parseDate(v.Date),
@@ -154,7 +154,7 @@
                     return dataArray
                 }
 
-                getStockInfo.getVisualizedData('AAPL').then(function(response) {
+                getStockInfo.getVisualizedData('"GOOG"').then(function(response) {
                     var rawData = response.data.query.results.quote;
                     var data = transformData(rawData);
                     var brush = d3.svg.brush()
@@ -248,25 +248,6 @@
                         .style('display', 'none')
                         .attr('r', 2.5);
 
-                    var mouseArea = svg.append('g')
-                        .attr('class', 'chart__mouse')
-                        .append('rect')
-                        .attr('class', 'chart__overlay')
-                        .attr('width', width)
-                        .attr('height', height)
-                        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-                        .on('mouseover', function() {
-                            helper.style('display', null);
-                            priceTooltip.style('display', null);
-                            averageTooltip.style('display', null);
-                        })
-                        .on('mouseout', function() {
-                            helper.style('display', 'none');
-                            priceTooltip.style('display', 'none');
-                            averageTooltip.style('display', 'none');
-                        })
-                        .on('mousemove', mousemove);
-
                     context.append('path')
                         .datum(data)
                         .attr('class', 'chart__area area')
@@ -284,17 +265,6 @@
                         .selectAll('rect')
                         .attr('y', -6)
                         .attr('height', height2 + 7);
-
-                    function mousemove() {
-                        var x0 = x.invert(d3.mouse(this)[0]);
-                        var i = bisectDate(data, x0, 1);
-                        var d0 = data[i - 1];
-                        var d1 = data[i];
-                        var d = x0 - d0.date > d1.date - x0 ? d1 : d0;
-                        helperText.text(legendFormat(new Date(d.date)) + ' - Price: ' + d.price + ', Avg: ' + d.average);
-                        priceTooltip.attr('transform', 'translate(' + x(d.date) + ',' + y(d.price) + ')');
-                        averageTooltip.attr('transform', 'translate(' + x(d.date) + ',' + y(d.average) + ')');
-                    }
 
                     function brushed() {
                         var ext = brush.extent();
@@ -322,49 +292,7 @@
                         focus.select('.x.axis').call(xAxis);
                         focus.select('.y.axis').call(yAxis);
                     }
-
-                    var dateRange = ['1w', '1m', '3m', '6m', '1y', '2y']
-                    for (var i = 0, l = dateRange.length; i < l; i++) {
-                        var v = dateRange[i];
-                        rangeSelection
-                            .append('text')
-                            .attr('class', 'chart__range-selection')
-                            .text(v)
-                            .attr('transform', 'translate(' + (18 * i) + ', 0)')
-                            .on('click', function(d) { focusOnRange(this.textContent); });
-                    }
-
-                    function focusOnRange(range) {
-                        var today = new Date(data[data.length - 1].date)
-                        var ext = new Date(data[data.length - 1].date)
-
-                        if (range === '1m')
-                            ext.setMonth(ext.getMonth() - 1)
-
-                        if (range === '1w')
-                            ext.setDate(ext.getDate() - 7)
-
-                        if (range === '3m')
-                            ext.setMonth(ext.getMonth() - 3)
-
-                        if (range === '6m')
-                            ext.setMonth(ext.getMonth() - 6)
-
-                        if (range === '1y')
-                            ext.setFullYear(ext.getFullYear() - 1)
-
-                        if (range === '2y')
-                            ext.setFullYear(ext.getFullYear() - 2)
-
-                        brush.extent([ext, today])
-                        brushed()
-                        context.select('g.x.brush').call(brush.extent([ext, today]))
-                    }
                 });
-
-                // d3.csv('data/aapl.csv', type, function(err, data) {
-                //     console.log(data);
-                // });
             }
         }
     });
