@@ -39,9 +39,9 @@
                         return;
                     }
                     // Check if the stock chart has already rendered or not
-                    var element = document.getElementById('stocka-graph-' + scope.requestSymbol);
-                    if (typeof(element) != 'undefined' && element != null) {
-                        document.body.removeChild(element);
+                    var element = document.getElementsByClassName('chart__wrapper');
+                    if (typeof(element[0]) != 'undefined' && element[0] != null) {
+                        document.body.removeChild(element[0]);
                     }
                     // Dimensions and margins format config
                     var margin = {
