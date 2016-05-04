@@ -117,6 +117,9 @@ reverse-proxying the backend server(s) and webserver(s).
 ```
 stocka/
   |  app/                                       --> all of the source files for the application
+  |  |   assets/
+  |  |   |   styles/
+  |  |   |   |   app.css                        --> default stylesheet
   |  |   scripts/
   |  |   |   controllers/
   |  |   |   |   stockController.js
@@ -125,15 +128,13 @@ stocka/
   |  |   |   services/
   |  |   |   |   d3.js                
   |  |   |   |   getStockInfo.js
+  |  |   |   app.js                             --> main application module
   |  |   templates/
-  |  |   |   stock.html
-  |  |   app.css                                --> default stylesheet
-  |  |   app.js                                 --> main application module
+  |  |   |   stock.html                            
   |  |   index.html                             --> app layout file (the main html template file of the app)
   |  e2e-tests/                                 --> end-to-end tests
   |	 |	 protractor.conf.js                     --> Protractor config file
   |  |   scenarios.js                           --> end-to-end scenarios to be run by Protractor
-  |  .bowerrc
   |  .gitignore
   |  .jshintrc
   |  .travis.yml
