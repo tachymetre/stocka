@@ -1,6 +1,6 @@
 # Stocka — Stock symbol lookup
 
-**Stocka** is a web application built on [AngularJS](https://angularjs.org/) and [D3](https://d3js.org/) technology that  provides a way to lookup and download stock information into CSV files automatically . You can use it to quickly find out the summary, calls, or puts of a single stock or multiple of them. The app focuses on stock options such as: Previous Close, Open, Bid, Ask, 1-year Target Estimate, Beta Constant, Earnings Date, Day’s Range, 52-week Range, Volume, Average Volume (3 months), Market Cap, P/E, EPS, Dividend & Yield, etc.
+**Stocka** is a web application built on [AngularJS](https://angularjs.org/) and [D3](https://d3js.org/) technology that  provides a way to lookup, visualize stock data and download stock information into CSV files automatically . You can use it to quickly find out the summary, calls, or puts of a single stock or multiple of them. The app focuses on stock options such as: Previous Close, Open, Bid, Ask, 1-year Target Estimate, Beta Constant, Earnings Date, Day’s Range, 52-week Range, Volume, Average Volume (3 months), Market Cap, P/E, EPS, Dividend & Yield, etc.
 
 The application contains all needed dependencies and is preconfigured to install the [Angular](https://angularjs.org/), [Bootstrap](http://getbootstrap.com/) frameworks and a bunch of development as well as testing tools for instant web development gratification.
 
